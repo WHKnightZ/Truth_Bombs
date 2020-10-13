@@ -1,0 +1,85 @@
+export const colors = {
+    "blue": "#01acfc",
+    "pink": "#fe39b4",
+    "yellow": "#cccc33",
+    "green": "#4eaf20",
+    "purple": "#5c35b2",
+    "gray": "#9f9f9f",
+    "black": "#0b0b0b"
+};
+
+export const users = [
+    { "name": "tien", "gender": 1 },
+    { "name": "quy", "gender": 1 },
+    { "name": "khanh", "gender": 1 },
+    { "name": "chan", "gender": 1 },
+    { "name": "hung", "gender": 1 },
+    { "name": "tri", "gender": 1 },
+    { "name": "minh", "gender": 1 },
+    { "name": "dung", "gender": 1 },
+    { "name": "thinh", "gender": 1 },
+    { "name": "sy", "gender": 1 },
+    { "name": "quyet", "gender": 0 },
+    { "name": "huong", "gender": 0 },
+    { "name": "trang", "gender": 0 },
+    { "name": "hang", "gender": 0 },
+    { "name": "linh", "gender": 1 },
+    { "name": "mai", "gender": 0 }
+];
+
+export const questions = [
+    "What is he most afraid of?",
+    "What did he dream about last night?",
+    "What did he collect secretly?",
+    "If there was a documentary film about him, what would it be called?",
+    "How do him 'really' spends his weekends?",
+    "What should his catchphrase be?",
+    "What will his last words be?",
+    "If the world ending, how would he spend his last day?",
+    "What film represents his life the best?",
+    "What question would he hate to answer?",
+    "What has he deleted in internet history lately?",
+    "What does he like most about you?",
+    "How would he describe you?",
+    "What is in the secret folder on his computer?",
+    "If he was a professor, what would he teach?",
+    "Who is his 'real' parents?",
+    "If he was a DJ, what would his name be?",
+    "What would his embarrassing old online username be?",
+    "In a word, describe the way he hug.",
+    "If you could change one thing about him, what would it be?",
+    "What does he want to improve on most of his body?",
+    "What is he most ashamed about?",
+    "If he could time travel, where would he go?",
+    "Which evil villain do he remind you of?",
+    "What one thing would he save from a fire?",
+    "What is his terrible habit that he really need to work on?",
+    "How old do he look?",
+    "What animal does he look like?",
+    "What would he sell his soul for?",
+    "What is his number one passion in life?",
+    "What is he obsessed with?",
+    "If he was a Transformer, what vehicle would he transform into?",
+    "If he was on a date from hell, how would he get out of it?",
+    "What should the hobbies section of his profile page say?",
+    "Who is his secret guilty crush?",
+    "what is he most likely to go to jail for?",
+    "If he was a god, what would he be the god of?",
+    "What is his 'secret' dream job?",
+    "How will he die?",
+    "What is he guilty pleasure?", // một đam mê nhưng thấy tội lỗi => thấy ngại, ko muốn nói ra vd: wjbu
+    "What is the last thing he look at on his phone before he sleeps?",
+    "What would his restaurant be called?",
+    "If he had a YouTUbe channel, what would it be about?",
+    "If you had a baby with him, what would you call it?",
+    "If he could only take one thing to a desert, what would it be?",
+    "Who would he push off a cliff?",
+    "If he had a superpower, what would it be?",
+    "If he was on the front page of a newspaper, what would be the headline?",
+    "He has a mysterious key, what is it for?",
+    "What does he secretly hide under the bed?"
+]
+
+// replace he, him by Target, you by Chooser
+// nếu chưa replace => he, him => name, his => name's
+// nếu đã => his, him => her tùy thuộc giới tính
