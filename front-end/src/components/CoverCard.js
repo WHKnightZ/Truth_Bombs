@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-import { colors } from '../data/data';
-import splash from '../images/splash.png';
+import { colors } from '../data';
+
+import imgSplash from '../images/splash.png';
+
 import FlashCard from './FlashCard';
 
 const splashStyle1 = {
@@ -49,10 +51,10 @@ const CoverCard = props => {
 
     return (
         <div style={cardStyle}>
-            <img style={splashStyle1} src={splash} width="420" height="420" />
-            <img style={splashStyle2} src={splash} width="300" height="300" />
+            <img style={splashStyle1} src={imgSplash} width="420" height="420" />
+            <img style={splashStyle2} src={imgSplash} width="300" height="300" />
             <div style={borderStyle}></div>
-            {props.content != null && <FlashCard content={props.content} />}
+            {props.question != null && <FlashCard question={props.question} />}
         </div>
     );
 };

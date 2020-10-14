@@ -12,7 +12,6 @@ function App() {
     const [isLogin, setIsLogin] = useState(false);
     const [isWaiting, setIsWaiting] = useState(true);
     const [name, setName] = useState(null);
-    const [gender, setGender] = useState(null);
 
     const [coverCard, setCoverCard] = useState();
     const [flashCard, setFlashCard] = useState([]);
@@ -20,6 +19,10 @@ function App() {
     useEffect(() => {
         setSocket(io("http://localhost:5012"));
     }, []);
+
+    // useEffect(() => {
+    //     console.log(coverCard, flashCard);
+    // }, [flashCard, coverCard]);
 
     useEffect(() => {
         if (!socket) return;
@@ -34,7 +37,6 @@ function App() {
             alert(data["msg"]);
         });
         socket.on("login", data => {
-            setGender(data["gender"]);
             setIsLogin(true);
             setIsWaiting(true);
         });
@@ -45,23 +47,27 @@ function App() {
             setCoverCard(data["num"]);
         });
         socket.on("add_flash_card", data => {
-            const a = [...flashCard, 'xxxxx']
-            setFlashCard(a);
-            // console.log(data["question"]);
+            setFlashCard(prev => [...prev, data["question"]]);
         });
     }, [socket]);
 
-    useEffect(() => {
-        console.log(flashCard)
-    }, [flashCard]);
     const login = (name) => {
         socket.emit("login", { "name": name });
     };
 
     const play = () => {
-        socket.emit("play", {});
+        socket.emit("play");
     };
 
+    let visibles = [];
+    let questions = [];
+    for (let i = 0; i < coverCard; i++)
+        visibles.push("visible");
+    for (let i = coverCard; i < 7; i++)
+        visibles.push("hidden");
+    questions = [...flashCard];
+    for (let i = flashCard.length; i < 7; i++)
+        questions.push(null);
     let Render = null;
     if (!isLogin) {
         Render =
@@ -78,15 +84,15 @@ function App() {
         Render =
             <div>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                    <CoverCard visible={coverCard > 0 ? "visible" : "hidden"} color="blue" question={flashCard.length > 0 ? flashCard[0] : null} />
-                    <CoverCard visible={coverCard > 1 ? "visible" : "hidden"} color="pink" question={flashCard.length > 1 ? flashCard[1] : null} />
-                    <CoverCard visible={coverCard > 2 ? "visible" : "hidden"} color="yellow" question={flashCard.length > 2 ? flashCard[2] : null} />
-                    <CoverCard visible={coverCard > 3 ? "visible" : "hidden"} color="green" question={flashCard.length > 3 ? flashCard[3] : null} />
+                    <CoverCard visible={visibles[0]} color="blue" question={questions[0]} />
+                    <CoverCard visible={visibles[1]} color="pink" question={questions[1]} />
+                    <CoverCard visible={visibles[2]} color="yellow" question={questions[2]} />
+                    <CoverCard visible={visibles[3]} color="green" question={questions[3]} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                    <CoverCard visible={coverCard > 4 ? "visible" : "hidden"} color="purple" question={flashCard.length > 4 ? flashCard[4] : null} />
-                    <CoverCard visible={coverCard > 5 ? "visible" : "hidden"} color="gray" question={flashCard.length > 5 ? flashCard[5] : null} />
-                    <CoverCard visible={coverCard > 6 ? "visible" : "hidden"} color="black" question={flashCard.length > 6 ? flashCard[6] : "saDsad"} />
+                    <CoverCard visible={visibles[4]} color="purple" question={questions[4]} />
+                    <CoverCard visible={visibles[5]} color="gray" question={questions[5]} />
+                    <CoverCard visible={visibles[6]} color="black" question={questions[6]} />
                 </div>
             </div>
     }
@@ -95,9 +101,9 @@ function App() {
         <div>
             <header className="App-header">
                 {Render}
-                <img src={logo} className="App-logo" alt="logo" />
+                {/* <img src={logo} className="App-logo" alt="logo" />
                 <p>Edit <code>src/App.js</code> and save to reload.</p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" >Learn React</a>
+                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" >Learn React</a> */}
             </header>
         </div>
     );

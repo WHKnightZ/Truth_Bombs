@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import line from '../images/line.png';
+import imgLine1 from '../images/line1.png';
+import imgLine2 from '../images/line1.png';
 
 const FlashCard = props => {
-    const deg = Math.floor(Math.random() * 5 - 2);
+    const [deg, setDeg] = useState(Math.floor(Math.random() * 5 - 2));
+    const [imgLine, setImgLine] = useState(Math.random() > 0.5 ? imgLine1 : imgLine2);
 
     const flashStyle = {
         width: '210px',
@@ -19,11 +21,11 @@ const FlashCard = props => {
     return (
         <div style={flashStyle}>
             <div style={{ color: 'black', fontSize: '20px', marginLeft: '20px', marginRight: '20px', width: '170px', height: '140px', transform: 'rotate(180deg)' }}>
-                {props.content}
+                {props.question}
             </div>
-            <img src={line} height={54} style={{ position: 'absolute', left: '24px', top: '153px' }} />
+            <img src={imgLine} height={54} style={{ position: 'absolute', left: '24px', top: '153px' }} />
             <div style={{ color: 'black', fontSize: '20px', marginLeft: '20px', marginRight: '20px', width: '170px', height: '140px', marginTop: '80px' }}>
-                {props.content}
+                {props.question}
             </div>
         </div >
     );
