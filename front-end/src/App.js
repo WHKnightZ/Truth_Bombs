@@ -79,6 +79,7 @@ function App() {
         Render =
             <div>
                 <button onClick={() => play()}>Play</button>
+                <img src={`https://raw.githubusercontent.com/WHKnightZ/Truth_Bombs/main/back-end/images/${name}.png`} />
             </div>
     } else {
         Render =
