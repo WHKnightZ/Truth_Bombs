@@ -1,7 +1,8 @@
 class User:
-    def __init__(self, name, gender):
+    def __init__(self, name, gender, image):
         self.name = name
         self.gender = gender
+        self.image = image
 
 
 users = [

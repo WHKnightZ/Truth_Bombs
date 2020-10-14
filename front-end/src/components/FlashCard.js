@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import imgLine1 from '../images/line1.png';
-import imgLine2 from '../images/line1.png';
+import imgLine2 from '../images/line2.png';
 
 const FlashCard = props => {
     const [deg, setDeg] = useState(Math.floor(Math.random() * 5 - 2));
