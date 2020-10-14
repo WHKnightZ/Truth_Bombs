@@ -56,7 +56,7 @@ function App() {
     };
 
     const play = () => {
-        socket.emit("play");
+        socket.emit("play", {});
     };
 
     let visibles = [];

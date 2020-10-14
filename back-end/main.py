@@ -62,7 +62,7 @@ def on_login(sid, data):
 
 
 @sio.on("play")
-def play(sid):
+def play(sid, data):
     game.shuffle_questions()
 
     sio.emit("play", {})
