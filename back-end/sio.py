@@ -23,7 +23,7 @@ def on_login(sid, data):
     name = data["name"]
     user = None
     for u in users:
-        if u.name == name:
+        if u.name.lower() == name.lower():
             user = u
     if user:
         game.add_user(user)

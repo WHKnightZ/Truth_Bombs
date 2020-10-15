@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import "./css/Button.css";
 
 import CoverCard from "./components/CoverCard";
+import Login from './components/Login';
+import UserCard from "./components/UserCard";
 
 const io = require("socket.io-client");
 
@@ -17,7 +20,8 @@ function App() {
     const [flashCard, setFlashCard] = useState([]);
 
     useEffect(() => {
-        setSocket(io("http://192.168.1.66:5012"));
+        setSocket(io("http://127.0.0.1:5012"));
+
     }, []);
 
     // useEffect(() => {
@@ -59,10 +63,16 @@ function App() {
         socket.emit("play", {});
     };
 
+    const handleChangeName = (e) => {
+        setName(e);
+    };
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter')
             login(name);
     };
+
+    let names = ["tien", "quy", "khanh", "chan", "hung", "tri", "minh", "dung", "thinh", "sy", "quyet", "huong", "trang", "hang", "linh", "mai"];
 
     let visibles = [];
     let questions = [];
@@ -76,31 +86,27 @@ function App() {
     let Render = null;
     if (!isLogin) {
         Render =
-            <div className="group">
-                <input className="input" placeholder="Input your name..." onChange={e => setName(e.target.value)} onKeyDown={handleKeyDown} />
-                <input type="text" required />
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label>Name</label>
-            </div>
+            <Login onChange={handleChangeName} onKeyDown={handleKeyDown} />
     } else if (isWaiting) {
         Render =
-            <div>
-                <button className="button" onClick={() => play()}>Play</button>
-                <img src={`https://raw.githubusercontent.com/WHKnightZ/Truth_Bombs/main/back-end/images/${name}.png`} />
+            <div style={{ textAlign: "center" }}>
+                <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", maxWidth: "1200px" }}>
+                    {names.map((name, i) => <UserCard name={name} active={i == 0 ? true : false} />)}
+                </div>
+                <div>
+                    <btn className="material-btn" onClick={() => play()}>Play</btn>
+                </div>
             </div>
     } else {
         Render =
-            <div>
-                <div style={{ display: "flex", flexDirection: "row",flexWrap: "wrap", justifyContent: "center", maxWidth: "1366px"}}>
-                    <CoverCard visible={visibles[0]} color="blue" question={questions[0]} />
-                    <CoverCard visible={visibles[1]} color="pink" question={questions[1]} />
-                    <CoverCard visible={visibles[2]} color="yellow" question={questions[2]} />
-                    <CoverCard visible={visibles[3]} color="green" question={questions[3]} />
-                    <CoverCard visible={visibles[4]} color="purple" question={questions[4]} />
-                    <CoverCard visible={visibles[5]} color="gray" question={questions[5]} />
-                    <CoverCard visible={visibles[6]} color="black" question={questions[6]} />
-                </div>
+            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", maxWidth: "1200px" }}>
+                <CoverCard visible={visibles[0]} color="blue" question={questions[0]} />
+                <CoverCard visible={visibles[1]} color="pink" question={questions[1]} />
+                <CoverCard visible={visibles[2]} color="yellow" question={questions[2]} />
+                <CoverCard visible={visibles[3]} color="green" question={questions[3]} />
+                <CoverCard visible={visibles[4]} color="purple" question={questions[4]} />
+                <CoverCard visible={visibles[5]} color="gray" question={questions[5]} />
+                <CoverCard visible={visibles[6]} color="black" question={questions[6]} />
             </div>
     }
 
