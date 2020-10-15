@@ -17,7 +17,7 @@ function App() {
     const [flashCard, setFlashCard] = useState([]);
 
     useEffect(() => {
-        setSocket(io("http://localhost:5012"));
+        setSocket(io("http://192.168.1.66:5012"));
     }, []);
 
     // useEffect(() => {
@@ -59,6 +59,11 @@ function App() {
         socket.emit("play", {});
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter')
+            login(name);
+    };
+
     let visibles = [];
     let questions = [];
     for (let i = 0; i < coverCard; i++)
@@ -71,26 +76,27 @@ function App() {
     let Render = null;
     if (!isLogin) {
         Render =
-            <div>
-                <input placeholder="Input your name..." onChange={e => setName(e.target.value)} />
-                <button onClick={() => login(name)}>Login</button>
+            <div className="group">
+                <input className="input" placeholder="Input your name..." onChange={e => setName(e.target.value)} onKeyDown={handleKeyDown} />
+                <input type="text" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Name</label>
             </div>
     } else if (isWaiting) {
         Render =
             <div>
-                <button onClick={() => play()}>Play</button>
+                <button className="button" onClick={() => play()}>Play</button>
                 <img src={`https://raw.githubusercontent.com/WHKnightZ/Truth_Bombs/main/back-end/images/${name}.png`} />
             </div>
     } else {
         Render =
             <div>
-                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                <div style={{ display: "flex", flexDirection: "row",flexWrap: "wrap", justifyContent: "center", maxWidth: "1366px"}}>
                     <CoverCard visible={visibles[0]} color="blue" question={questions[0]} />
                     <CoverCard visible={visibles[1]} color="pink" question={questions[1]} />
                     <CoverCard visible={visibles[2]} color="yellow" question={questions[2]} />
                     <CoverCard visible={visibles[3]} color="green" question={questions[3]} />
-                </div>
-                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                     <CoverCard visible={visibles[4]} color="purple" question={questions[4]} />
                     <CoverCard visible={visibles[5]} color="gray" question={questions[5]} />
                     <CoverCard visible={visibles[6]} color="black" question={questions[6]} />
