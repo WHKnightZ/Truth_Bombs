@@ -9,6 +9,12 @@ import UserCard from "./components/UserCard";
 
 const io = require("socket.io-client");
 
+const pingPong = (x, max) => {
+    let a = x % (2 * max);
+    a = a > x ? 2 * x - a : a;
+    return a;
+};
+
 function App() {
     const [socket, setSocket] = useState(null);
 
@@ -25,7 +31,6 @@ function App() {
 
     useEffect(() => {
         setSocket(io("http://127.0.0.1:5012"));
-
     }, []);
 
     // useEffect(() => {
@@ -63,10 +68,10 @@ function App() {
         });
         socket.on("choose_target", data => {
             setTarget(data);
-            for (let i = 0; i <= 20; i++) {
+            for (let i = 0; i <= 60; i++) {
                 setTimeout(() => {
-                    setOpacity(Math.abs(10 - i) * 0.05 + 0.5);
-                }, 20 * i);
+                    setOpacity((10 - pingPong(i, 10)) * 0.05 + 0.5);
+                }, 10 * i);
             }
         });
     }, [socket]);
