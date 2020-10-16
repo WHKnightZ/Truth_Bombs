@@ -1,6 +1,7 @@
 import random
 
 from models.question import questions
+from models.user import users
 
 
 class Game:
@@ -11,10 +12,11 @@ class Game:
     chooser = None
 
     def __init__(self):
-        pass
+        self.online_users = [*users]
 
     def add_user(self, user):
-        self.online_users.append(user)
+        if user not in self.online_users:
+            self.online_users.append(user)
 
     def shuffle_questions(self):
         self.questions = [*questions]

@@ -19,6 +19,10 @@ function App() {
     const [coverCard, setCoverCard] = useState();
     const [flashCard, setFlashCard] = useState([]);
 
+    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [target, setTarget] = useState(0);
+    const [opacity, setOpacity] = useState(1.0);
+
     useEffect(() => {
         setSocket(io("http://127.0.0.1:5012"));
 
@@ -41,6 +45,7 @@ function App() {
             alert(data["msg"]);
         });
         socket.on("login", data => {
+            setOnlineUsers(data);
             setIsLogin(true);
             setIsWaiting(true);
         });
@@ -52,6 +57,17 @@ function App() {
         });
         socket.on("add_flash_card", data => {
             setFlashCard(prev => [...prev, data["question"]]);
+        });
+        socket.on("choose_player", data => {
+            setTarget(data);
+        });
+        socket.on("choose_target", data => {
+            setTarget(data);
+            for (let i = 0; i <= 20; i++) {
+                setTimeout(() => {
+                    setOpacity(Math.abs(10 - i) * 0.05 + 0.5);
+                }, 20 * i);
+            }
         });
     }, [socket]);
 
@@ -72,8 +88,6 @@ function App() {
             login(name);
     };
 
-    let names = ["tien", "quy", "khanh", "chan", "hung", "tri", "minh", "dung", "thinh", "sy", "quyet", "huong", "trang", "hang", "linh", "mai"];
-
     let visibles = [];
     let questions = [];
     for (let i = 0; i < coverCard; i++)
@@ -91,10 +105,10 @@ function App() {
         Render =
             <div style={{ textAlign: "center" }}>
                 <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", maxWidth: "1200px" }}>
-                    {names.map((name, i) => <UserCard name={name} active={i == 0 ? true : false} />)}
+                    {onlineUsers.map((user, i) => <UserCard name={user.name} active={i == target ? true : false} opacity={opacity} />)}
                 </div>
                 <div>
-                    <btn className="material-btn" onClick={() => play()}>Play</btn>
+                    <button className="material-btn" onClick={() => play()}>Play</button>
                 </div>
             </div>
     } else {
