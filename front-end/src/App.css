@@ -1,70 +1,19 @@
-/* Font */
-@font-face {
-  font-family: 'DidactGothic-Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/DidactGothic-Regular.ttf') format('truetype');
+.items {
+    text-align: center;
+    margin: 0 auto;
+    align-items: center;
+    max-width: 1200px;
 }
 
-@font-face {
-  font-family: 'Quicksand-SemiBold';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/Quicksand-SemiBold.ttf') format('truetype');
+.item {
+    display: inline-block;
+    margin: 10px;
+    width: 120px;
+    height: 150px;
+    line-height: 100px;
+    text-align: center;
 }
 
-@font-face {
-  font-family: 'GoudarHL-Ultra';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/GoudarHL-Ultra.otf') format('opentype');
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-image: url('images/background.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-color: #282c345f;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  font-family: 'DidactGothic-Regular';
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.logo {
-  font-family: 'GoudarHL-Ultra';
-  font-size: 100px;
+body {
+    background-color: #ddd;
 }

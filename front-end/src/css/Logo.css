@@ -1,0 +1,26 @@
+.logo-style {
+    display: flex;
+    font-family: "GoudarHL-Ultra";
+    font-size: 100px;
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.text1 {
+    background-color: #eee;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: -10px 10px 10px #7e7e7e9f;
+    transform: rotate(-4deg);
+}
+
+.text2 {
+    background-color: black;
+    color: #eee;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: -10px 10px 10px #7e7e7e9f;
+}

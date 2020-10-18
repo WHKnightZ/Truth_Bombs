@@ -1,60 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { colors } from '../data';
+import { colors } from "../data";
 
-import imgSplash from '../images/splash.png';
+import imgSplash from "../images/splash.png";
 
-import FlashCard from './FlashCard';
+import FlashCard from "./FlashCard";
 
-const splashStyle1 = {
-    position: 'absolute',
-    left: '-85px',
-    top: '-10px',
-    opacity: '20%'
-};
+import "../css/CoverCard.css";
 
-const splashStyle2 = {
-    position: 'absolute',
-    left: '-25px',
-    top: '40px',
-    transform: 'rotate(140deg)',
-    opacity: '40%'
-};
-
-const borderStyle = {
-    position: 'absolute',
-    borderRadius: '20px',
-    borderStyle: 'solid',
-    borderWidth: '5px',
-    borderColor: '#ffffffcf',
-    width: '190px',
-    height: '340px',
-    left: '25px',
-    top: '25px'
-};
-
-const CoverCard = props => {
+const CoverCard = (props) => {
     const [deg, setDeg] = useState(Math.floor(Math.random() * 7 - 3));
 
     const cardStyle = {
-        position: 'relative',
-        width: '250px',
-        height: '400px',
-        borderRadius: '25px',
+        position: "relative",
+        width: "210px",
+        height: "320px",
+        borderRadius: "20px",
         backgroundColor: colors[props.color],
-        overflow: 'hidden',
-        transform: 'rotate(' + deg + 'deg)',
+        overflow: "hidden",
+        transform: "rotate(" + deg + "deg)",
         boxShadow: "-2px 2px 6px #9E9E9E5F",
-        margin: "20px",
-        visibility: props.visible
+        margin: "15px 30px 15px 30px",
+        visibility: props.visible,
+        border: "2px solid #6f6f6f",
+        cursor: "pointer",
     };
 
     return (
-        <div style={cardStyle}>
-            <img style={splashStyle1} src={imgSplash} width="420" height="420" />
-            <img style={splashStyle2} src={imgSplash} width="300" height="300" />
-            <div style={borderStyle}></div>
-            {props.question != null && <FlashCard question={props.question} />}
+        <div style={cardStyle} onClick={() => props.onClick(props.i)}>
+            <img
+                className="splashStyle1"
+                src={imgSplash}
+                width="336"
+                height="336"
+                alt="splash1"
+            />
+            <img
+                className="splashStyle2"
+                src={imgSplash}
+                width="240"
+                height="240"
+                alt="splash2"
+            />
+            <div className="borderStyle"></div>
+            {props.question !== "" && <FlashCard question={props.question} />}
         </div>
     );
 };

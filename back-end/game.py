@@ -9,7 +9,10 @@ class Game:
     questions = []
 
     target = None
-    chooser = None
+    questioner = None
+
+    is_playing = False
+    is_idle = True
 
     def __init__(self):
         self.online_users = [*users]

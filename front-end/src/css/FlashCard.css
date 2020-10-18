@@ -1,0 +1,25 @@
+.question1 {
+    color: black;
+    font-size: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 158px;
+    height: 110px;
+    transform: rotate(180deg);
+}
+
+.question2 {
+    color: black;
+    font-size: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 158px;
+    height: 123px;
+    margin-top: 68px;
+}
+
+.img {
+    position: absolute;
+    left: 8px;
+    top: 123px;
+}
