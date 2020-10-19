@@ -46,7 +46,7 @@
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    font-size: calc(10px + 2vmin);
+    font-size: calc(12px + 1.2vmin);
     color: white;
     font-family: "Quicksand-SemiBold";
 }

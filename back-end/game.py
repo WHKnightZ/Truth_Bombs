@@ -6,7 +6,7 @@ from models.user import users
 
 class Game:
     online_users = []
-    questions = []
+    questions = [*questions]
 
     target = None
     questioner = None

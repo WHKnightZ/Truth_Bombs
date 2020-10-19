@@ -10,7 +10,7 @@ import UserCard from "./components/UserCard";
 import Menu from "./components/Menu";
 
 import FlipMove from "react-flip-move";
-import { colors, listColors } from "./data";
+import { listColors } from "./data";
 
 const io = require("socket.io-client");
 
@@ -25,7 +25,7 @@ function App() {
     const [gameState, setGameState] = useState(GS_LOGIN);
     const [name, setName] = useState(null);
 
-    const [coverCard, setCoverCard] = useState();
+    const [coverCard, setCoverCard] = useState(-1);
     const [flashCard, setFlashCard] = useState(["", "", "", "", "", "", ""]);
 
     const [onlineUsers, setOnlineUsers] = useState([]);
@@ -39,9 +39,11 @@ function App() {
         setSocket(io("http://127.0.0.1:5012"));
     }, []);
 
-    // useEffect(() => {
-    //     console.log(coverCard, flashCard);
-    // }, [flashCard, coverCard]);
+    useEffect(() => {
+        console.log("q3:", flashCard);
+    }, [flashCard]);
+
+    var abc = [...flashCard];
 
     useEffect(() => {
         if (!socket) return;
@@ -66,12 +68,10 @@ function App() {
             setCoverCard(data["num"]);
         });
         socket.on("add_flash_card", (data) => {
-            let questions = [...flashCard];
-            console.log(questions);
-            questions = flashCard;
-            console.log(questions);
-            questions[data["num"]] = data["question"];
-            setFlashCard(["xxx", "yyy", "zzz", "", "", "", ""]);
+            console.log(abc);
+            // const questions = [...flashCard];
+            // questions[data["num"]] = data["question"];
+            setFlashCard(flashCard => [...flashCard, "x"]);
         });
         socket.on("choose_player", (data) => {
             setPlayer(data);
