@@ -57,13 +57,13 @@ def on_login(sid, data):
 
 @sio.on("play")
 def play(sid, data):
-    if game.is_playing:
-        return
+    # if game.is_playing:
+    #     return
     game.is_playing = True
     game.is_idle = False
     sio.emit("choosing", "Choosing a Target")
     game.target = choose_player("target")
-    game.online_users.remove(game.target)
+    # game.online_users.remove(game.target)
     time.sleep(2)
     sio.emit("choosing", "Choosing a Questioner")
     game.questioner = choose_player("questioner")

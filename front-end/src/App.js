@@ -39,11 +39,9 @@ function App() {
         setSocket(io("http://127.0.0.1:5012"));
     }, []);
 
-    useEffect(() => {
-        console.log("q3:", flashCard);
-    }, [flashCard]);
-
-    var abc = [...flashCard];
+    // useEffect(() => {
+    //     console.log("q3:", flashCard);
+    // }, [flashCard]);
 
     useEffect(() => {
         if (!socket) return;
@@ -68,10 +66,12 @@ function App() {
             setCoverCard(data["num"]);
         });
         socket.on("add_flash_card", (data) => {
-            console.log(abc);
-            // const questions = [...flashCard];
-            // questions[data["num"]] = data["question"];
-            setFlashCard(flashCard => [...flashCard, "x"]);
+            setFlashCard((flashCard) => {
+                console.log("a", flashCard);
+                const questions = [...flashCard];
+                questions[data["num"]] = data["question"];
+                return questions;
+            });
         });
         socket.on("choose_player", (data) => {
             setPlayer(data);
