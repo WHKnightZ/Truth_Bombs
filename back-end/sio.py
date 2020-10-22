@@ -13,11 +13,11 @@ def choose_player(_type):
     online_users = game.online_users
     num_users = len(online_users)
     u = random.randint(0, num_users - 1)
-    for i in range(num_users * 2 + u):
+    for i in range(num_users + u):
         sio.emit("choose_player", online_users[i % num_users]["name"])
         time.sleep(0.05)
     delay = 0.05
-    for i in range(num_users * 2 + u, num_users * 3 + u):
+    for i in range(num_users + u, num_users * 2 + u):
         sio.emit("choose_player", online_users[i % num_users]["name"])
         delay += 0.02
         time.sleep(delay)

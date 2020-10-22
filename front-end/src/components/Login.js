@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Logo from "./Logo";
 
 import "../css/Login.css";
 
 const Login = (props) => {
-    const [s, ss] = useState(" box");
-
     return (
-        <div className={"container" + s}>
+        <div className={"container"}>
             <Logo />
             <div className="text-login">LOGIN</div>
             <div className="input-container">
@@ -17,7 +15,7 @@ const Login = (props) => {
                     className="input"
                     required
                     onChange={(e) => props.onChange(e.target.value)}
-                    onKeyDown={() => ss(" box1")}
+                    onKeyDown={props.onKeyDown}
                 />
                 <label className="label" htmlFor="name">
                     Your Name

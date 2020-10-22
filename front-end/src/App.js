@@ -35,12 +35,14 @@ function App() {
     const [cardState, setCardState] = useState(0);
     const [choosingText, setChoosingText] = useState("Play");
 
+    const [className, setClassName] = useState("anim1");
+
     useEffect(() => {
         setSocket(io("http://127.0.0.1:5012"));
     }, []);
 
     // useEffect(() => {
-    //     console.log("q3:", flashCard);
+    //     console.log(flashCard);
     // }, [flashCard]);
 
     useEffect(() => {
@@ -67,7 +69,6 @@ function App() {
         });
         socket.on("add_flash_card", (data) => {
             setFlashCard((flashCard) => {
-                console.log("a", flashCard);
                 const questions = [...flashCard];
                 questions[data["num"]] = data["question"];
                 return questions;
@@ -128,7 +129,29 @@ function App() {
     let Render = null;
     if (gameState === GS_LOGIN) {
         Render = (
-            <Login onChange={handleChangeName} onKeyDown={handleKeyDown} />
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <button
+                    className={className}
+                    onClick={() =>
+                        setClassName((className) => {
+                            if (className == "anim1") return "anim2";
+                            return "anim1";
+                        })
+                    }>
+                    A
+                </button>
+                <button
+                    className={className}
+                    onClick={() =>
+                        setClassName((className) => {
+                            if (className == "anim1") return "anim2";
+                            return "anim1";
+                        })
+                    }>
+                    B
+                </button>
+            </div>
+            // <Login onChange={handleChangeName} onKeyDown={handleKeyDown} />
         );
     } else if (gameState === GS_LOBBY) {
         Render = (
