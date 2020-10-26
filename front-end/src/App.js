@@ -129,7 +129,7 @@ function App() {
     let Render = null;
     if (gameState === GS_LOGIN) {
         Render = (
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <button
                     className={className}
                     onClick={() =>
@@ -150,6 +150,13 @@ function App() {
                     }>
                     B
                 </button>
+                <div style={{fontSize: 100}}>sad</div>
+                <div style={{fontSize: 100}}>sad</div>
+                <div style={{fontSize: 100}}>sad</div>
+                <div style={{fontSize: 100}}>sad</div>
+                <div style={{fontSize: 100}}>sad</div>
+                <div style={{fontSize: 100}}>sad</div>
+
             </div>
             // <Login onChange={handleChangeName} onKeyDown={handleKeyDown} />
         );
