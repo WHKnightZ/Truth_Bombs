@@ -35,7 +35,7 @@ function App() {
     const [cardState, setCardState] = useState(0);
     const [choosingText, setChoosingText] = useState("Play");
 
-    const [className, setClassName] = useState("anim1");
+    const [tl, setTL] = useState([0, 0]);
 
     useEffect(() => {
         setSocket(io("http://127.0.0.1:5012"));
@@ -101,6 +101,11 @@ function App() {
         socket.on("choosing", (data) => {
             setChoosingText(data);
         });
+
+        setTL([
+            document.getElementById("btn").offsetTop,
+            document.getElementById("btn").offsetLeft,
+        ]);
     }, [socket]);
 
     const login = (name) => {
@@ -127,36 +132,58 @@ function App() {
     for (let i = 0; i < coverCard; i++) visibles.push("visible");
     for (let i = coverCard; i < 7; i++) visibles.push("hidden");
     let Render = null;
+
+    const [anim, setAnim] = useState({
+        position: "static",
+        width: 300,
+        height: 300,
+        margin: "0 auto",
+        transition: "all 1s ease 0s",
+    });
+
+    let anim1 = {
+        position: "absolute",
+        width: 300,
+        height: 300,
+        top: tl[0],
+        left: tl[1],
+        transition: "all 1s ease 0s",
+    };
+
+    let anim2 = {
+        position: "absolute",
+        width: 300,
+        height: 300,
+        top: 100,
+        left: 100,
+        transition: "all 1s ease 0s",
+    };
+
     if (gameState === GS_LOGIN) {
         Render = (
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                }}>
                 <button
-                    className={className}
-                    onClick={() =>
-                        setClassName((className) => {
-                            if (className == "anim1") return "anim2";
-                            return "anim1";
-                        })
-                    }>
+                    id="btn"
+                    style={anim}
+                    onClick={() => {
+                        setAnim(anim1);
+                        setTimeout(() => {
+                            setAnim(anim2);
+                        }, 10);
+                    }}>
                     A
                 </button>
-                <button
-                    className={className}
-                    onClick={() =>
-                        setClassName((className) => {
-                            if (className == "anim1") return "anim2";
-                            return "anim1";
-                        })
-                    }>
-                    B
-                </button>
-                <div style={{fontSize: 100}}>sad</div>
-                <div style={{fontSize: 100}}>sad</div>
-                <div style={{fontSize: 100}}>sad</div>
-                <div style={{fontSize: 100}}>sad</div>
-                <div style={{fontSize: 100}}>sad</div>
-                <div style={{fontSize: 100}}>sad</div>
-
+                {/* <div style={{ fontSize: 100 }}>sad</div>
+                <div style={{ fontSize: 100 }}>sad</div>
+                <div style={{ fontSize: 100 }}>sad</div>
+                <div style={{ fontSize: 100 }}>sad</div>
+                <div style={{ fontSize: 100 }}>sad</div>
+                <div style={{ fontSize: 100 }}>sad</div> */}
             </div>
             // <Login onChange={handleChangeName} onKeyDown={handleKeyDown} />
         );
